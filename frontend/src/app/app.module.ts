@@ -4,14 +4,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AngularFireModule} from "angularfire2";
-import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
+import {environment} from "../environments/open-mc.environment";
+import {OpenMicListingComponent} from "./core/open-mic-listing/open-mic-listing.component";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OpenMicListingComponent
   ],
   imports: [
     BrowserModule,

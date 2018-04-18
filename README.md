@@ -9,3 +9,6 @@
 
 Reference for setup: https://medium.com/codingthesmartway-com-blog/building-an-angular-5-project-with-bootstrap-4-and-firebase-4504ff7717c1
 (note: Bootstrap not included in this)
+
+**_Initial Setup_**
+Navigate into the `/frontend` folder and run `npm install`
