@@ -10,6 +10,7 @@ import {environment} from "../environments/open-mc.environment";
 import {OpenMicListingComponent} from "./core/open-mic-listing/open-mic-listing.component";
 import {DirectorService} from "./services/director.service";
 import {OpenMicService} from "./services/open-mic.service";
+import {ClarityModule} from "@clr/angular";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {OpenMicService} from "./services/open-mic.service";
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ClarityModule
   ],
   providers: [DirectorService, OpenMicService],
   bootstrap: [AppComponent]
