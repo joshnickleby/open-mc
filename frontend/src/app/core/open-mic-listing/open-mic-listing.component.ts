@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {AngularFireDatabase} from "angularfire2/database";
+import {PerformerListSubject} from "../../domain/custom-subjects";
+import {OpenMicService} from "../../services/open-mic.service";
 
 
 @Component({
@@ -8,13 +10,11 @@ import {AngularFireDatabase} from "angularfire2/database";
   templateUrl: './open-mic-listing.component.html'
 })
 export class OpenMicListingComponent implements OnInit {
-  testObservable$ = new BehaviorSubject<any[]>([]);
+  performers$: PerformerListSubject;
 
-  listPath = '/performers';
-
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private openMicService: OpenMicService) {}
 
   ngOnInit(): void {
-    this.db.list(this.listPath).valueChanges().subscribe(res => this.testObservable$.next(res));
+    this.performers$ = this.openMicService.getPerformers();
   }
 }

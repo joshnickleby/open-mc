@@ -8,6 +8,8 @@ import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {environment} from "../environments/open-mc.environment";
 import {OpenMicListingComponent} from "./core/open-mic-listing/open-mic-listing.component";
+import {DirectorService} from "./services/director.service";
+import {OpenMicService} from "./services/open-mic.service";
 
 
 @NgModule({
@@ -21,7 +23,7 @@ import {OpenMicListingComponent} from "./core/open-mic-listing/open-mic-listing.
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [],
+  providers: [DirectorService, OpenMicService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
