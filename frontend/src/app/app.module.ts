@@ -11,6 +11,7 @@ import {OpenMicListingComponent} from "./core/open-mic-listing/open-mic-listing.
 import {DirectorService} from "./services/director.service";
 import {OpenMicService} from "./services/open-mic.service";
 import {ClarityModule} from "@clr/angular";
+import {NgDragDropModule} from "ng-drag-drop";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {ClarityModule} from "@clr/angular";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ClarityModule
+    ClarityModule,
+    NgDragDropModule.forRoot()
   ],
   providers: [DirectorService, OpenMicService],
   bootstrap: [AppComponent]
