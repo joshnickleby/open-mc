@@ -3,6 +3,8 @@
 1. Managing open mic itinerary
 
 * **Framework**: Angular 5
+    * Clarity Design System: https://vmware.github.io/clarity/documentation/v0.11/get-started
+    * ng-drag-drop: https://www.npmjs.com/package/ng-drag-drop
 * **Database**: Firebase
     * Must provide your own environment variable (see `environment.ts` as example)
     * Keep this file out of your app if posting online

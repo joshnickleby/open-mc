@@ -4,4 +4,33 @@
   {{(performers$ | async) | json}}
 </pre>
 
+<div style="display: flex;">
+  <table class="table">
+    <tbody>
+    <tr *ngFor="let performer of (performers$ | async); let i = index">
+      <div [draggable]
+           [dragClass]="'active'"
+           [dragData]="performer"
+           [dragEnabled]="true"
+           style="border: 1px solid #a5a5a5; border-radius: 4px;">{{performer.name}}</div>
+    </tr>
+    </tbody>
+  </table>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Time Slots</th>
+      <th>Performer</th>
+    </tr>
+  </thead>
 
+  <tbody>
+    <tr *ngFor="let timeslot of timeList; let i = index">
+      <td>{{timeslot.time}}</td>
+      <td droppable (onDrop)="doSomething($event, i)">
+        {{timeslot?.performer?.name}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

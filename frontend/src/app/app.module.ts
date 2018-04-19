@@ -12,6 +12,7 @@ import {DirectorService} from "./services/director.service";
 import {OpenMicService} from "./services/open-mic.service";
 import {ClarityModule} from "@clr/angular";
 import {NgDragDropModule} from "ng-drag-drop";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {NgDragDropModule} from "ng-drag-drop";
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ClarityModule,
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    FormsModule
   ],
   providers: [DirectorService, OpenMicService],
   bootstrap: [AppComponent]
