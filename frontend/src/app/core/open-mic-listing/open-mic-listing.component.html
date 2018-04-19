@@ -28,7 +28,10 @@
     <tr *ngFor="let timeslot of timeList; let i = index">
       <td>{{timeslot.time}}</td>
       <td droppable (onDrop)="doSomething($event, i)">
-        {{timeslot?.performer?.name}}
+        <div [draggable]
+        [dragClass]="'active'"
+        [dragData]="timeslot?.performer"
+        [dragEnabled]="true">{{timeslot?.performer?.name}}</div>
       </td>
     </tr>
   </tbody>

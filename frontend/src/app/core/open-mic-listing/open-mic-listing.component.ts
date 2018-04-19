@@ -28,7 +28,19 @@ export class OpenMicListingComponent implements OnInit {
   }
 
   doSomething(event, index) {
-    console.log(event.dragData);
+    let exists = this.timeList.map(time => time.performer).indexOf(event.dragData);
+    console.log('existing: ', this.timeList[index].performer);
+
+    if(exists != -1) {
+      console.log('existing INSIDE: ', this.timeList[index].performer);
+      if(this.timeList[index].performer !== undefined) {
+        this.timeList[exists].performer = this.timeList[index].performer;
+      } else {
+        this.timeList[exists].performer = null;
+      }
+      this.timeList[index].performer = event.dragData;
+    }
+
     this.timeList[index].performer = event.dragData;
   }
 }
