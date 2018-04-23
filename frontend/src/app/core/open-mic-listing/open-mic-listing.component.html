@@ -1,6 +1,6 @@
 
 
-<pre>
+<pre *ngIf="false">
   {{(performers$ | async) | json}}
 </pre>
 
@@ -27,7 +27,7 @@
   <tbody>
     <tr *ngFor="let timeslot of timeList; let i = index">
       <td>{{timeslot.time}}</td>
-      <td droppable (onDrop)="doSomething($event, i)">
+      <td droppable (onDrop)="onDrop($event, i)">
         <div [draggable]
         [dragClass]="'active'"
         [dragData]="timeslot?.performer"

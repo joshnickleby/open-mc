@@ -2,6 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {PerformerListSubject} from "../../domain/custom-subjects";
 import {OpenMicService} from "../../services/open-mic.service";
 import {TimeSlot} from "../../domain/time-slot.model";
+import {generateTimeSlot} from "../../common/factories";
+import {Duplex} from "../../common/duplexes";
 
 
 @Component({
@@ -19,15 +21,21 @@ export class OpenMicListingComponent implements OnInit {
     this.generateTimeSlots();
   }
 
+  //region GENERATE TIME SLOTS
+  /**
+   * Generate the initial timeslots. Current standard: 8pm - 1am; increment by 15 mins
+   */
   generateTimeSlots() {
-    const hours = ['8','9','10','11','12'];
-    const slots = ['00', '15', '30', '45'];
+    const hoursAndSlots = new Duplex<string, string>(
+      ['8','9','10','11','12'], ['00', '15', '30', '45']
+    );
 
-    hours.forEach(hour => slots.forEach(slot => this.timeList.push(new TimeSlot(hour + ':' + slot))));
+    this.timeList = hoursAndSlots.collect(generateTimeSlot);
     this.timeList.push('1:00');
   }
+  //endregion GENERATE TIME SLOTS
 
-  doSomething(event, index) {
+  onDrop(event, index) {
     let exists = this.timeList.map(time => time.performer).indexOf(event.dragData);
     console.log('existing: ', this.timeList[index].performer);
 
