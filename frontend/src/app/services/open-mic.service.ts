@@ -18,4 +18,14 @@ export class OpenMicService extends DirectorService {
 
     return this.performers$;
   }
+
+  public removePerformer(performer: Performer):PerformerListSubject {
+    this.performers$.next(this.performers$.getValue().filter(this.allExcept(performer)));
+
+    return this.performers$;
+  }
+
+  private allExcept(performer: Performer) {
+    return (p) => p != performer;
+  }
 }

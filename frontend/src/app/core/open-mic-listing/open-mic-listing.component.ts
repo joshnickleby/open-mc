@@ -4,6 +4,8 @@ import {OpenMicService} from "../../services/open-mic.service";
 import {TimeSlot} from "../../domain/time-slot.model";
 import {generateTimeSlot} from "../../common/factories";
 import {Duplex} from "../../common/duplexes";
+import {Performer} from "../../domain/firebase-entities";
+import {exists, isAvailable, isNotAvailable} from "../../common/validators.fn";
 
 
 @Component({
@@ -35,20 +37,29 @@ export class OpenMicListingComponent implements OnInit {
   }
   //endregion GENERATE TIME SLOTS
 
-  onDrop(event, index) {
-    let exists = this.timeList.map(time => time.performer).indexOf(event.dragData);
-    console.log('existing: ', this.timeList[index].performer);
 
-    if(exists != -1) {
-      console.log('existing INSIDE: ', this.timeList[index].performer);
-      if(this.timeList[index].performer !== undefined) {
-        this.timeList[exists].performer = this.timeList[index].performer;
-      } else {
-        this.timeList[exists].performer = null;
-      }
-      this.timeList[index].performer = event.dragData;
+  //region ON DROP
+  onDrop(event, index) {
+    const performer: Performer = event.dragData;
+
+    // check if the performer is already present
+    const performersPreviousIndex = this.timeList.map(this.extractPerformer).indexOf(performer);
+
+    // if present then remove and swap name from list
+    if(performersPreviousIndex != -1) {
+      const performerToSwap = this.timeList[index].performer;
+      // if performer exists in target slot then put them in the target performer's last spot
+      this.timeList[performersPreviousIndex] = exists(performerToSwap) ? performerToSwap : null;
     }
 
-    this.timeList[index].performer = event.dragData;
+    // add the performer to the slot
+    this.timeList[index].performer = performer;
+
+    // remove performer from selection list
+    this.performers$ = this.openMicService.removePerformer(performer);
   }
+
+  extractPerformer = (time: TimeSlot) => time.performer;
+  //endregion ON DROP
+
 }
